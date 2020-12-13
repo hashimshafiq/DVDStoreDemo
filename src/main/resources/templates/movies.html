@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DVD Store</title>
+</head>
+<body>
+<table>
+    <thead>
+        <td>Cover Image</td>
+        <td>Title</td>
+        <td>Won Oscar</td>
+        <td>Year</td>
+    </thead>
+
+    <tbody>
+        <tr th:each="movie : ${movies}">
+            <td><img width="120" th:src="${movie.coverImage}" /></td>
+            <td th:text="${movie.title}"></td>
+            <td th:text="${movie.wonOscar}"></td>
+            <td th:text="${movie.year}"></td>
+
+
+
+        </tr>
+
+
+    </tbody>
+
+    <tbody>
+    <form method="post" th:action="@{/movies}" th:object="${movie}">
+        <tr>
+            <td>
+                URL: <input name="coverImage" th:field="*{coverImage}" type="text">
+                <span th:if="${#fields.hasErrors('coverImage')}" th:errors="*{coverImage}" />
+            </td>
+
+            <td>
+                Title: <input name="title" th:field="*{title}" type="text">
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
+            </td>
+            <td>Win Oscar?: <input name="wonOscar" th:field="*{wonOscar}" type="checkbox"></td>
+            <td>
+                Year: <input name="year" th:field="*{year}" type="text">
+                <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" />
+            </td>
+            <td>
+                <button>Create</button>
+            </td>
+        </tr>
+
+
+    </form>
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+</body>
+</html>
