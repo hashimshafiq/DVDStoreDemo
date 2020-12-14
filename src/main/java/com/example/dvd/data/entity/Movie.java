@@ -1,11 +1,14 @@
 package com.example.dvd.data.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
 @Entity
 public class Movie {
 
@@ -16,4 +19,13 @@ public class Movie {
     private boolean wonOscar;
     private int year;
     private String coverImage;
+
+    @ManyToMany
+    @JoinTable(name = "movie_actor",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    private List<Actor> actors;
+
+    @ManyToOne
+    private FilmStudio filmStudio;
 }
