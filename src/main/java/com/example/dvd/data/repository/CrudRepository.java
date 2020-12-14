@@ -1,4 +1,4 @@
-package com.example.dvd;
+package com.example.dvd.data.repository;
 
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;

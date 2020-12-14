@@ -7,9 +7,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
+@SuppressWarnings("JpaDataSourceORMInspection")
 @Data
 @NoArgsConstructor
 @Entity
+@NamedEntityGraph(name = "Movie.movies",
+    attributeNodes = @NamedAttributeNode(value = "actors"))
 public class Movie {
 
     @Id
@@ -20,12 +23,12 @@ public class Movie {
     private int year;
     private String coverImage;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movie_actor",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actors;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private FilmStudio filmStudio;
 }
