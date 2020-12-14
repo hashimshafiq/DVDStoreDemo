@@ -51,7 +51,6 @@ public class MovieController {
             log.info("... but there are errors included" + movie);
             return "movies";
         }else {
-            movie.setId("" + (this.movieRepository.count()+1));
             this.movieRepository.save(movie);
 
             return "redirect:/movies";
